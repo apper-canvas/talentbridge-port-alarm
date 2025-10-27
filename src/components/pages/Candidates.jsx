@@ -10,7 +10,7 @@ import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
 import { applicationService } from "@/services/api/applicationService";
-import { savedJobsService } from "@/services/api/savedJobsService";
+import savedJobsService from "@/services/api/savedJobsService";
 import { jobService } from "@/services/api/jobService";
 import { formatDistanceToNow } from "date-fns";
 import { cn } from "@/utils/cn";
