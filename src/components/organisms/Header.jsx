@@ -10,9 +10,10 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const navigationItems = [
+const navigationItems = [
     { name: "Home", href: "/" },
     { name: "Browse Jobs", href: "/jobs" },
+    { name: "My Dashboard", href: "/candidates" },
     { name: "For Employers", href: "/employers" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" }
