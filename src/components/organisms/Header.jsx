@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Button from "@/components/atoms/Button";
 import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
+import Jobs from "@/components/pages/Jobs";
 import { cn } from "@/utils/cn";
 
 const Header = () => {
@@ -41,17 +42,15 @@ const Header = () => {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
+{/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navigationItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
                 className={cn(
-                  "text-sm font-medium transition-colors duration-200 relative",
-                  isActive(item.href)
-                    ? "text-primary"
-                    : "text-gray-600 hover:text-primary"
+                  "text-gray-700 hover:text-primary transition-colors font-medium relative",
+                  isActive(item.href) && "text-primary"
                 )}
               >
                 {item.name}

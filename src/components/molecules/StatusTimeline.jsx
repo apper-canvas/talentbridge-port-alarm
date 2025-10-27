@@ -2,8 +2,8 @@ import React from "react";
 import { cn } from "@/utils/cn";
 import ApperIcon from "@/components/ApperIcon";
 
-const StatusTimeline = ({ currentStatus, className }) => {
-  const statuses = [
+const StatusTimeline = ({ currentStatus, showAll = false, className }) => {
+  const allStatuses = [
     {
       key: "submitted",
       label: "Application Submitted",
@@ -23,12 +23,32 @@ const StatusTimeline = ({ currentStatus, className }) => {
       icon: "CheckCircle"
     },
     {
-      key: "interview",
-      label: "Interview Scheduled",
-      description: "Interview details will be shared soon",
+      key: "interviewed",
+      label: "Interview Completed",
+      description: "Interview has been conducted",
       icon: "Calendar"
+    },
+    {
+      key: "offered",
+      label: "Offer Extended",
+      description: "Congratulations! An offer has been extended",
+      icon: "Award"
+    },
+    {
+      key: "rejected",
+      label: "Not Selected",
+      description: "Thank you for your interest",
+      icon: "XCircle"
+    },
+    {
+      key: "withdrawn",
+      label: "Application Withdrawn",
+      description: "Application has been withdrawn",
+      icon: "Minus"
     }
   ];
+
+  const statuses = showAll ? allStatuses : allStatuses.slice(0, 4);
 
   const getCurrentStatusIndex = () => {
     return statuses.findIndex(status => status.key === currentStatus);

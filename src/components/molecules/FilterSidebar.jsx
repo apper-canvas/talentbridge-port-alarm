@@ -3,7 +3,7 @@ import FormField from "@/components/molecules/FormField";
 import Button from "@/components/atoms/Button";
 import ApperIcon from "@/components/ApperIcon";
 
-const FilterSidebar = ({ filters, onFilterChange, onClearFilters, isOpen, onClose }) => {
+const FilterSidebar = ({ filters, onFilterChange, onClearFilters, isOpen, onClose, showStatusFilter = false, showDateRange = false }) => {
   const jobTypes = [
     { value: "full-time", label: "Full-time" },
     { value: "part-time", label: "Part-time" },
@@ -25,6 +25,25 @@ const FilterSidebar = ({ filters, onFilterChange, onClearFilters, isOpen, onClos
     { value: "marketing", label: "Marketing" },
     { value: "sales", label: "Sales" },
     { value: "education", label: "Education" }
+  ];
+
+  const applicationStatuses = [
+    { value: "submitted", label: "Applied" },
+    { value: "under-review", label: "In Review" },
+    { value: "shortlisted", label: "Shortlisted" },
+    { value: "interviewed", label: "Interviewed" },
+    { value: "offered", label: "Offered" },
+    { value: "rejected", label: "Rejected" },
+    { value: "withdrawn", label: "Withdrawn" }
+  ];
+
+  const dateRanges = [
+    { value: "all", label: "All Time" },
+    { value: "today", label: "Today" },
+    { value: "week", label: "This Week" },
+    { value: "month", label: "This Month" },
+    { value: "quarter", label: "Last 3 Months" },
+    { value: "year", label: "This Year" }
   ];
 
   return (
@@ -54,10 +73,34 @@ const FilterSidebar = ({ filters, onFilterChange, onClearFilters, isOpen, onClos
           </div>
 
           <div className="hidden lg:block mb-6">
-            <h2 className="text-lg font-semibold text-gray-900">Filter Jobs</h2>
+            <h2 className="text-lg font-semibold text-gray-900">Filter {showStatusFilter ? 'Applications' : 'Jobs'}</h2>
           </div>
 
           <div className="space-y-6">
+            {showDateRange && (
+              <FormField
+                type="select"
+                label="Date Range"
+                name="dateRange"
+                value={filters.dateRange || 'all'}
+                onChange={onFilterChange}
+                options={dateRanges}
+                placeholder="Select date range"
+              />
+            )}
+
+            {showStatusFilter && (
+              <FormField
+                type="select"
+                label="Application Status"
+                name="status"
+                value={filters.status}
+                onChange={onFilterChange}
+                options={applicationStatuses}
+                placeholder="All statuses"
+              />
+            )}
+
             <FormField
               label="Location"
               name="location"
@@ -76,25 +119,29 @@ const FilterSidebar = ({ filters, onFilterChange, onClearFilters, isOpen, onClos
               placeholder="Select job type"
             />
 
-            <FormField
-              type="select"
-              label="Experience Level"
-              name="experienceLevel"
-              value={filters.experienceLevel}
-              onChange={onFilterChange}
-              options={experienceLevels}
-              placeholder="Select experience level"
-            />
+            {!showStatusFilter && (
+              <>
+                <FormField
+                  type="select"
+                  label="Experience Level"
+                  name="experienceLevel"
+                  value={filters.experienceLevel}
+                  onChange={onFilterChange}
+                  options={experienceLevels}
+                  placeholder="Select experience level"
+                />
 
-            <FormField
-              type="select"
-              label="Industry"
-              name="industry"
-              value={filters.industry}
-              onChange={onFilterChange}
-              options={industries}
-              placeholder="Select industry"
-            />
+                <FormField
+                  type="select"
+                  label="Industry"
+                  name="industry"
+                  value={filters.industry}
+                  onChange={onFilterChange}
+                  options={industries}
+                  placeholder="Select industry"
+                />
+              </>
+            )}
 
             <FormField
               label="Min Salary"
